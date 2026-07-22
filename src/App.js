@@ -1,14 +1,19 @@
 import React from 'react';
-import { Button, Box } from '@chakra-ui/react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 function App() {
   return (
-    <Layout>
-      <Box p={4}>
-        <Button colorScheme="teal">Hello Chakra UI</Button>
-      </Box>
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
