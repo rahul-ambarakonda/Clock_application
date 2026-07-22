@@ -12,9 +12,7 @@ const ProductDetailPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      const foundProduct = getProductById(id);
+      const foundProduct = await getProductById(id);
       setProduct(foundProduct);
       setLoading(false);
     };
