@@ -1,0 +1,156 @@
+[
+  {
+    "id": "prod_001",
+    "name": "French Door Refrigerator with Ice Maker",
+    "category": "Refrigerators",
+    "price": 2499.99,
+    "description": "Spacious French door refrigerator with an external ice and water dispenser, perfect for large families.",
+    "imageUrl": "https://example.com/images/fridge_001.jpg",
+    "brand": "CoolTech",
+    "availability": "In Stock",
+    "rating": 4.7
+  },
+  {
+    "id": "prod_002",
+    "name": "High-Efficiency Front Load Washing Machine",
+    "category": "Washing Machines",
+    "price": 899.00,
+    "description": "Energy-efficient washing machine with multiple wash cycles and steam cleaning option.",
+    "imageUrl": "https://example.com/images/washer_001.jpg",
+    "brand": "AquaClean",
+    "availability": "In Stock",
+    "rating": 4.5
+  },
+  {
+    "id": "prod_003",
+    "name": "Smart Electric Wall Oven with Convection",
+    "category": "Ovens",
+    "price": 1299.50,
+    "description": "Smart oven with Wi-Fi connectivity, convection baking, and self-cleaning feature.",
+    "imageUrl": "https://example.com/images/oven_001.jpg",
+    "brand": "ChefMaster",
+    "availability": "In Stock",
+    "rating": 4.8
+  },
+  {
+    "id": "prod_004",
+    "name": "Quiet Dishwasher with Stainless Steel Tub",
+    "category": "Dishwashers",
+    "price": 679.99,
+    "description": "Ultra-quiet dishwasher with multiple wash cycles and a durable stainless steel interior.",
+    "imageUrl": "https://example.com/images/dishwasher_001.jpg",
+    "brand": "SparkleWash",
+    "availability": "In Stock",
+    "rating": 4.6
+  },
+  {
+    "id": "prod_005",
+    "name": "Gas Range with Griddle and Double Oven",
+    "category": "Ovens",
+    "price": 1899.00,
+    "description": "Professional-grade gas range with a built-in griddle and convenient double oven for multi-tasking.",
+    "imageUrl": "https://example.com/images/gasrange_001.jpg",
+    "brand": "ProCook",
+    "availability": "In Stock",
+    "rating": 4.9
+  },
+  {
+    "id": "prod_006",
+    "name": "Top Load Washer with Agitator",
+    "category": "Washing Machines",
+    "price": 749.00,
+    "description": "Traditional top load washer with a powerful agitator for deep cleaning.",
+    "imageUrl": "https://example.com/images/toploadwasher_001.jpg",
+    "brand": "HomeCare",
+    "availability": "In Stock",
+    "rating": 4.3
+  },
+  {
+    "id": "prod_007",
+    "name": "Counter-Depth Side-by-Side Refrigerator",
+    "category": "Refrigerators",
+    "price": 1999.00,
+    "description": "Sleek counter-depth side-by-side refrigerator that blends seamlessly with your cabinetry.",
+    "imageUrl": "https://example.com/images/fridge_002.jpg",
+    "brand": "StyleCool",
+    "availability": "In Stock",
+    "rating": 4.6
+  },
+  {
+    "id": "prod_008",
+    "name": "Compact Portable Dishwasher",
+    "category": "Dishwashers",
+    "price": 499.00,
+    "description": "Ideal for small kitchens, this portable dishwasher offers powerful cleaning without permanent installation.",
+    "imageUrl": "https://example.com/images/portable_dishwasher_001.jpg",
+    "brand": "CompactClean",
+    "availability": "Out of Stock",
+    "rating": 4.2
+  },
+  {
+    "id": "prod_009",
+    "name": "Over-the-Range Microwave with Sensor Cooking",
+    "category": "Microwaves",
+    "price": 329.99,
+    "description": "Convenient over-the-range microwave with sensor cooking technology and powerful ventilation.",
+    "imageUrl": "https://example.com/images/microwave_001.jpg",
+    "brand": "QuickHeat",
+    "availability": "In Stock",
+    "rating": 4.4
+  },
+  {
+    "id": "prod_010",
+    "name": "Electric Dryer with Steam Sanitize",
+    "category": "Dryers",
+    "price": 799.00,
+    "description": "Efficient electric dryer with steam sanitize cycle to reduce wrinkles and eliminate germs.",
+    "imageUrl": "https://example.com/images/dryer_001.jpg",
+    "brand": "DryFast",
+    "availability": "In Stock",
+    "rating": 4.5
+  },
+  {
+    "id": "prod_011",
+    "name": "Built-In Coffee Maker with Grinder",
+    "category": "Coffee Makers",
+    "price": 1199.00,
+    "description": "Integrated coffee maker with a built-in grinder for fresh, barista-quality coffee at home.",
+    "imageUrl": "https://example.com/images/coffee_maker_001.jpg",
+    "brand": "BrewGenius",
+    "availability": "In Stock",
+    "rating": 4.7
+  },
+  {
+    "id": "prod_012",
+    "name": "Wine Cooler Refrigerator",
+    "category": "Refrigerators",
+    "price": 599.00,
+    "description": "Compact wine cooler with dual temperature zones, perfect for preserving your favorite wines.",
+    "imageUrl": "https://example.com/images/wine_cooler_001.jpg",
+    "brand": "ChillCellar",
+    "availability": "In Stock",
+    "rating": 4.6
+  },
+  {
+    "id": "prod_013",
+    "name": "Smart Induction Cooktop",
+    "category": "Cooktops",
+    "price": 999.00,
+    "description": "Modern induction cooktop with precise temperature control and smart features for effortless cooking.",
+    "imageUrl": "https://example.com/images/induction_cooktop_001.jpg",
+    "brand": "TechCook",
+    "availability": "In Stock",
+    "rating": 4.8
+  },
+  {
+    "id": "prod_014",
+    "name": "Robot Vacuum Cleaner with Smart Mapping",
+    "category": "Vacuum Cleaners",
+    "price": 499.00,
+    "description": "Automated robot vacuum with intelligent mapping and powerful suction for a spotless home.",
+    "imageUrl": "https://example.com/images/robot_vacuum_001.jpg",
+    "brand": "CleanBot",
+    "availability": "In Stock",
+    "rating": 4.5
+  }
+]

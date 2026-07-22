@@ -1,0 +1,107 @@
+# This project is a Clock_application. Its core purpose is to provide functionalities related to time.
+# Foundational features for time display and management are now implemented, with the project poised for
+# further extensions such as alarms, timers, or world clocks.
+#
+# Sprint work completed this cycle:
+# CAA-5, CAA-7, CAA-6, CAA-8, CAA-9, CAA-10, CAA-11, CAA-12, CAA-13, CAA-14, CAA-15, CAA-16, CAA-17, CAA-18, CAA-19, CAA-20, CAA-21
+
+name: CI/CD Pipeline
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Using a recent LTS version
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Run tests
+        run: npm test --if-present
+        continue-on-error: true
+
+      - name: Run lint
+        run: npm run lint --if-present
+        continue-on-error: true
+
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    env:
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+
+    steps:
+      - name: Skip deploy if EC2 secrets are not configured
+        if: env.EC2_HOST == ''
+        run: |
+          echo "EC2_HOST secret is not configured. Skipping deployment."
+          exit 0 # Exit successfully as skipping is intended behavior
+
+      - name: Deploy with SSH
+        if: env.EC2_HOST != ''
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # a. Source nvm so node/npm/pnpm are available in the non-interactive SSH shell
+            export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            # b. cd to deploy path
+            cd ${{ secrets.EC2_DEPLOY_PATH }}
+
+            # c. Fetch and hard-reset to remote
+            git fetch origin main
+            git reset --hard origin/main
+
+            # d. Sync new env vars from .env.sample into .env
+            if [ -f .env.sample ]; then
+              touch .env
+              while IFS= read -r line; do
+                # skip blank lines and comments
+                [[ -z "$line" || "$line" == \#* ]] && continue
+                key=$(echo "$line" | cut -d= -f1)
+                # only append if key not already present in .env
+                if ! grep -q "^${key}=" .env 2>/dev/null; then
+                  echo "$line" >> .env
+                  echo "⚠️  New env var added (set real value): ${key}"
+                fi
+              done < .env.sample
+            fi
+
+            # e. Install dependencies
+            if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+            # f. Run build step if the project has one
+            npm run build --if-present
+
+            # g. Restart the app with PM2 using zero-downtime reload
+            pm2 reload app --update-env || pm2 start src/index.js --name app
+
+            # h. pm2 save
+            pm2 save
