@@ -14,10 +14,11 @@ const HomePage = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const fetchedCategories = getAllCategories();
+        setLoading(true);
+        const fetchedCategories = await getAllCategories();
         setCategories(fetchedCategories);
 
-        const allProducts = getAllProducts();
+        const allProducts = await getAllProducts();
         setProducts(allProducts);
       } catch (err) {
         setError('Failed to fetch initial data.');
@@ -36,11 +37,11 @@ const HomePage = () => {
       try {
         let fetchedProducts;
         if (searchQuery) {
-          fetchedProducts = searchProducts(searchQuery);
+          fetchedProducts = await searchProducts(searchQuery);
         } else if (selectedCategory) {
-          fetchedProducts = getProductsByCategory(selectedCategory);
+          fetchedProducts = await getProductsByCategory(selectedCategory);
         } else {
-          fetchedProducts = getAllProducts();
+          fetchedProducts = await getAllProducts();
         }
         setProducts(fetchedProducts);
       } catch (err) {
