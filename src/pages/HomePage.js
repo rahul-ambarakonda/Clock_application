@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, SimpleGrid, Spinner, Alert, AlertIcon, Heading, Button, Stack } from '@chakra-ui/react';
+import { Box, SimpleGrid, Spinner, Alert, AlertIcon, Heading, Button, Stack, Input } from '@chakra-ui/react';
 import ProductCard from '../components/ProductCard';
-import { getAllProducts, getProductsByCategory, getAllCategories } from '../services/dataService';
+import { getAllProducts, getProductsByCategory, getAllCategories, searchProducts } from '../services/dataService';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -9,6 +9,7 @@ const HomePage = () => {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -30,11 +31,13 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchAndFilterProducts = async () => {
       setLoading(true);
       try {
         let fetchedProducts;
-        if (selectedCategory) {
+        if (searchQuery) {
+          fetchedProducts = searchProducts(searchQuery);
+        } else if (selectedCategory) {
           fetchedProducts = getProductsByCategory(selectedCategory);
         } else {
           fetchedProducts = getAllProducts();
@@ -48,8 +51,8 @@ const HomePage = () => {
       }
     };
 
-    fetchProducts();
-  }, [selectedCategory]);
+    fetchAndFilterProducts();
+  }, [selectedCategory, searchQuery]); // Re-run effect when category or search query changes
 
   if (loading) {
     return (
@@ -75,17 +78,33 @@ const HomePage = () => {
       <Heading as="h1" size="xl" mb="6" textAlign="center">
         Our Products
       </Heading>
+      <Input
+        placeholder="Search products..."
+        value={searchQuery}
+        onChange={(e) => {
+          setSearchQuery(e.target.value);
+          setSelectedCategory(null); // Clear category selection when searching
+        }}
+        mb="6"
+        size="lg"
+      />
       <Stack direction="row" spacing={4} mb={6} justify="center" wrap="wrap">
         <Button
-          onClick={() => setSelectedCategory(null)}
-          colorScheme={selectedCategory === null ? 'teal' : 'gray'}
+          onClick={() => {
+            setSelectedCategory(null);
+            setSearchQuery(''); // Clear search query when "All Products" is clicked
+          }}
+          colorScheme={selectedCategory === null && searchQuery === '' ? 'teal' : 'gray'}
         >
           All Products
         </Button>
         {categories.map((category) => (
           <Button
             key={category}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => {
+              setSelectedCategory(category);
+              setSearchQuery(''); // Clear search query when a category is selected
+            }}
             colorScheme={selectedCategory === category ? 'teal' : 'gray'}
           >
             {category}
