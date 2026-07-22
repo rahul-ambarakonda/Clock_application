@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
       _hover={{ shadow: "lg" }}
     >
       <Link as={RouterLink} to={`/products/${product.id}`}>
-        <Image src={product.imageUrl} alt={product.name} boxSize="200px" objectFit="cover" mx="auto" />
+        <Image src={product.imageUrl || "https://via.placeholder.com/200"} alt={product.name} boxSize="200px" objectFit="cover" mx="auto" />
         <Box p="6">
           <Heading as="h3" size="md" mb="2" noOfLines={1}>
             {product.name}
