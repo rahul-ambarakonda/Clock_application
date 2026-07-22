@@ -44,7 +44,7 @@ const ProductDetailPage = () => {
         <Box flexShrink={0}>
           <Image
             borderRadius="lg"
-            src={product.imageUrl}
+            src={product.imageUrl || "https://via.placeholder.com/400"}
             alt={product.name}
             objectFit="cover"
             width={{ base: \'100%\', md: \'400px\' }}
